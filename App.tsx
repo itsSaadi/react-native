@@ -1,13 +1,40 @@
 import React, { useState } from 'react'
-import { SafeAreaView, View, Text, Button, StyleSheet } from 'react-native'
+import { SafeAreaView, View, Text, Button, StyleSheet, useColorScheme, Switch } from 'react-native'
 
 export default function App() {
   const [count, setCount] = useState(0)
 
+  let isDarkMode = useColorScheme() === 'dark'
+  const changeTheme = () => {
+    isDarkMode !== isDarkMode
+  }
+  const styles = StyleSheet.create({
+    main: {
+      backgroundColor: isDarkMode ? 'white' : 'black',
+
+    },
+    counter: {
+      color: isDarkMode ? 'black' : 'white',
+      fontSize: 50,
+    },
+    heading: {
+      color: isDarkMode ? 'black' : 'white',
+      fontSize: 45,
+      fontFamily: 'serif'
+    }
+  })
+
+
   return (
-    <SafeAreaView>
-      <View>
+    <SafeAreaView  >
+      <View style={styles.main}>
         <Text style={styles.heading}> Counter App</Text>
+        <Switch
+          onChange={changeTheme}
+        >
+
+
+        </Switch>
         <Text style={styles.counter}>
           {count}
         </Text>
@@ -33,15 +60,3 @@ export default function App() {
   )
 }
 
-const styles = StyleSheet.create({
-  counter: {
-    color: 'red',
-    fontSize: 50,
-  },
-  heading: {
-    fontSize: 45,
-    color: 'purple',
-    fontFamily: 'serif'
-  }
-
-})
